@@ -1,0 +1,3 @@
+# USB
+ro.sys.usb.storage.type=mtp
+ro.display.series=Lenovo Tab M7 (3rd Gen)
