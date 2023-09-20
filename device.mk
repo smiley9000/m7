@@ -50,3 +50,25 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES_DEBUG += \
     update_engine_client
+
+# Additional configs
+TW_RECOVERY_ADDITIONAL_RELINK_LIBRARY_FILES += \
+    $(TARGET_OUT_SHARED_LIBRARIES)/android.hardware.keymaster@4.0.so \
+    $(TARGET_OUT_SHARED_LIBRARIES)/libkeymaster4.so 
+TARGET_RECOVERY_DEVICE_MODULES += \
+    android.hardware.keymaster@4.0 \
+    libkeymaster4.so 
+
+# Keymaster
+PRODUCT_PACKAGES += \
+    android.hardware.keymaster@4.0
+
+# Keystore Hal
+PRODUCT_PACKAGES += \
+    android.system.keystore
+
+# Security
+PRODUCT_PACKAGES += \
+    android.hardware.security.keymint \
+    android.hardware.security.secureclock \
+    android.hardware.security.sharedsecret
