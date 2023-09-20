@@ -1,3 +1,9 @@
 # USB
 ro.sys.usb.storage.type=mtp
 ro.display.series=Lenovo Tab M7 (3rd Gen)
+fbe.metadata.wrappedkey=true
+ro.crypto.volume.filenames_mode=aes-256-cts
+ro.vendor.mtk_microtrust_tee_support=1
+ro.hardware.gatekeeper=itrusty
+ro.hardware.keystore=itrusty
+ro.hardware.kmsetkey=itrusty
