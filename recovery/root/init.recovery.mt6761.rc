@@ -1,6 +1,6 @@
 on boot
     start health-hal-2-1
-	start boot-hal-1-1
+    start boot-hal-1-1
 
 
 on init
@@ -24,3 +24,55 @@ on post-fs
 
     exec u:r:update_engine:s0 root root -- /system/bin/mtk_plpath_utils
 
+on fs
+    install_keyring
+on init
+    export LD_LIBRARY_PATH /system/lib:/vendor/lib:/vendor/lib/hw
+
+
+service keystore_auth /system/bin/keystore_auth
+    oneshot
+    user system
+    group root
+    disabled
+    seclabel u:r:recovery:s0
+
+service keystore /system/bin/keystore /tmp/misc/keystore
+    user root
+    group root drmrpc readproc
+    disabled
+    seclabel u:r:recovery:s0
+
+service vendor.gatekeeper-1-0 /vendor/bin/hw/android.hardware.gatekeeper@1.0-service.beanpod.lite
+    interface android.hardware.gatekeeper@1.0::IGatekeeper default
+    user root
+    group root
+    disabled
+    seclabel u:r:recovery:s0
+
+service vendor.keymaster-4-0-beanpod /vendor/bin/hw/android.hardware.keymaster@4.0-service.beanpod.lite
+    interface android.hardware.keymaster@4.0::IKeymasterDevice default
+    user root
+    group root drmrpc
+    disabled
+    oneshot
+    seclabel u:r:recovery:s0
+
+on property:crypto.ready=true
+    start vendor.keymaster-4-0
+
+on property:hwservicemanager.ready=true
+    start vendor.keymaster-4-0
+    start vendor.gatekeeper-1-0
+
+on property:ro.crypto.state=unsupported
+    stop vendor.keymaster-4-0
+    stop vendor.gatekeeper-1-0
+
+on property:ro.crypto.state=unencrypted
+    stop vendor.keymaster-4-0
+    stop vendor.gatekeeper-1-0
+
+on property:twrp.decrypt.done=true && property:twrp.all.users.decrypted=true
+    stop vendor.keymaster-4-0
+    stop vendor.gatekeeper-1-0
