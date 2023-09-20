@@ -36,7 +36,8 @@ fi
 if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
 	export FOX_AB_DEVICE=1
  	export OF_MAINTAINER=Smiley_9000
-  export OF_DISABLE_MIUI_SPECIFIC_FEATURES=1
+        export OF_DISABLE_MIUI_SPECIFIC_FEATURES=1
+        export OF_FLASHLIGHT_ENABLE=0
 
 
 
