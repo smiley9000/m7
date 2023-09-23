@@ -21,7 +21,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
 $(call inherit-product, device/lenovo/m7/device.mk)
 
 # Inherit from TWRP common configurations
-$(call inherit-product, vendor/twrp/config/common.mk)
+$(call inherit-product, vendor/pb/config/common.mk)
 
 PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,$(LOCAL_PATH)/recovery/root,recovery/root)
 
@@ -30,11 +30,14 @@ PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,$(LOCAL_PATH)/recovery/roo
 
 ## Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := m7
-PRODUCT_NAME := twrp_m7
 PRODUCT_BRAND := Lenovo
 PRODUCT_MODEL := TB-7306F
 PRODUCT_MANUFACTURER := Lenovo
 PRODUCT_RELEASE_NAME := Lenovo Tab M7 (3rd Gen)
+BOARD_VENDOR := Lenovo
+PRODUCT_DEVICE := TB-7306F
+PRODUCT_NAME := twrp_device
+TARGET_VENDOR := Lenovo
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
     TARGET_DEVICE=lenovo_m7 \
